@@ -131,13 +131,7 @@ tgNo integer,tranName varchar(20),typeCode integer,typeName varchar(20),villageN
 	cx.close()
 
 
-test = PostData()
-post_data = test.__dict__
 
-
-
-#main
-outageURL="http://www.95598.cn/95598/outageNotice/initOutageNotice?type=1&partNo=PM06003002"
 headers = {
 "Host":"www.95598.cn",
 "Connection": "keep-alive",
@@ -150,8 +144,16 @@ headers = {
 "Accept-Encoding": "gzip, deflate",
 "Accept-Language": "zh-CN,zh;q=0.8"
 }
-#post_data=({'orgNo':'21401','outageStartTime':'2015-08-01','outageEndTime':'2015-08-05','scope':'','provinceNo':'21102','typeCode':'','lineName':''})
+
+test = PostData()
+post_data = test.__dict__
+
+
+
+#main
+outageURL="http://www.95598.cn/95598/outageNotice/initOutageNotice?type=1&partNo=PM06003002"
 posturl="http://www.95598.cn/95598/outageNotice/queryOutageNoticeList"
+#post_data=({'orgNo':'21401','outageStartTime':'2015-08-01','outageEndTime':'2015-08-05','scope':'','provinceNo':'21102','typeCode':'','lineName':''})
 
 #访问显示停电的页面，获得cookies
 cj = cookielib.CookieJar()
@@ -180,7 +182,7 @@ pageModelTuple=tuple(pageModel.values())
 #print pageModelTuple
 
 seleList = s["seleList"]
-print(len(seleList))
+#print(len(seleList))
 create_outageDB()
 insert_outageInfo(seleList)
 
